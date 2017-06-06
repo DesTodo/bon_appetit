@@ -22,5 +22,16 @@ class PantryTest < Minitest::Test
     assert_equal 0, pantry.stock_check("Cheese")
   end
 
+  def test_restock_adds_ingredient_and_quantity_to_stock
+    pantry   = Pantry.new
+    expected = pantry.restock("Cheese", 10)
+
+    assert_equal 10, expected["Cheese"]
+    assert_instance_of Hash, expected
+    assert_equal 10, pantry.stock_check("Cheese")
+  end
+
+
+
 
 end
