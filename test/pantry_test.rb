@@ -41,7 +41,7 @@ class PantryTest < Minitest::Test
   end
 
   def test_pantry_can_convert_units
-    skip
+    r = Recipe.new("Spicy Cheese Pizza")
     pantry = Pantry.new
     pantry.convert_units(r)
     #

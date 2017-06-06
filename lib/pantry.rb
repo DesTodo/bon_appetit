@@ -23,6 +23,10 @@ class Pantry
   return @stock
   end
 
+  def convert_units(recipe)
+    
+
+  end
 
 end
 #
