@@ -14,16 +14,26 @@ class Pantry
   end
 
   def restock(ingredient, quantity)
-    ingredients = []
-    hash = {ingredient => quantity}
-    @stock = hash
+    current_quantity = @stock[ingredient]
+    @stock[ingredient] = quantity
 
-    ingredients << @stock.merge({ingredient => quantity})
-     if @stock.include?(ingredient)
-       @stock[ingredient] += quantity
+    if @stock.include?(ingredient)
+       @stock[ingredient] = current_quantity.to_i + quantity.to_i
     end
-    return @stock
-
+  return @stock
   end
 
+
 end
+#
+#   # Building our recipe
+# r = Recipe.new("Spicy Cheese Pizza")
+# r.add_ingredient("Cayenne Pepper", 0.025)
+# r.add_ingredient("Cheese", 75)
+# r.add_ingredient("Flour", 500)
+#
+# pantry = Pantry.new
+#
+# # Convert units for this recipe
+#
+# pantry.convert_units(r)
