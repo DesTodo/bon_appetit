@@ -10,17 +10,20 @@ class Pantry
     if @stock[ingredient].nil?
       return 0
     end
-    @stock[ingredient]
+     @stock[ingredient]
   end
 
   def restock(ingredient, quantity)
-    hash = {"Cheese" => 10}
+    ingredients = []
+    hash = {ingredient => quantity}
     @stock = hash
+
+    ingredients << @stock.merge({ingredient => quantity})
+     if @stock.include?(ingredient)
+       @stock[ingredient] += quantity
+    end
+    return @stock
+
   end
 
 end
-
-
-# pantry.restock("Cheese", 20)
-# pantry.stock_check("Cheese")
-# # => 30
