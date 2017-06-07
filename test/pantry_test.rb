@@ -78,4 +78,30 @@ class PantryTest < Minitest::Test
 
     assert_equal expected, actual
   end
+
+  def test_shopping_list_creates_array_with_ingredients
+    pantry = Pantry.new
+    r = Recipe.new("Cheese Pizza")
+    r.add_ingredient("Cheese", 20)
+    r.add_ingredient("Flour", 20)
+
+    # Adding the recipe to the shopping list
+    pantry.add_to_shopping_list(r)
+
+    # Checking the shopping list
+    assert_equal ({"Cheese" => 20, "Flour" => 20}), pantry.shopping_list
+
+    # A second recipe
+    r = Recipe.new("Spaghetti")
+    r.add_ingredient("Noodles", 10)
+    r.add_ingredient("Sauce", 10)
+    r.add_ingredient("Cheese", 5)
+
+    # Adding a second recipe to the shopping list
+    pantry.add_to_shopping_list(r)
+
+    # Checking the shopping list
+    assert_equal ({"Cheese" => 25, "Flour" => 20, "Noodles" => 10, "Sauce" => 10}), pantry.shopping_list
+
+  end
 end
