@@ -17,6 +17,20 @@ class RecipeTest < Minitest::Test
     assert_equal ["Flour", "Cheese"], r.ingredient_types
   end
 
+  def test_add_ingredient
+    r = Recipe.new("Spicy Cheese Pizza")
+    r.add_ingredient("Cayenne Pepper", 0.025)
+    r.add_ingredient("Cheese", 75)
+    r.add_ingredient("Flour", 500)
+
+    expected_ingedients = {
+      "Cayenne Pepper" => 25,
+      "Cheese"         => 75,
+      "Flour"          => 5
+    }
+    assert_equal r.ingredients, expected_ingedients
+  end
+
   def test_it_tracks_amount_of_a_recipe_required
     r = Recipe.new("Cheese Pizza")
     r.add_ingredient("Flour", 500)

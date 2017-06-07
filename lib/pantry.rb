@@ -1,31 +1,44 @@
 require 'pry'
 
 class Pantry
-  attr_reader :stock, :restock
+  attr_reader :stock
   def initialize
     @stock = {}
   end
 
   def stock_check(ingredient)
     if @stock[ingredient].nil?
-      return 0
-    end
+        0
+    else
      @stock[ingredient]
+    end
   end
 
   def restock(ingredient, quantity)
-    current_quantity = @stock[ingredient]
-    @stock[ingredient] = quantity
+    current_quantity   = stock_check(ingredient)
+    @stock[ingredient] = current_quantity + quantity
 
-    if @stock.include?(ingredient)
-       @stock[ingredient] = current_quantity.to_i + quantity.to_i
+  end
+
+  def convert_unit(number)
+    if number > 100
+      {quantity: number / 100, units: "Centi-Units"}
+    elsif number < 1
+      {quantity: 1000 * number, units: "Milli-Units"}
+    else
+      {quantity: number, units: "Universal Units"}
     end
-  return @stock
   end
 
   def convert_units(recipe)
-    
+    # * Centi-Units -- Equals 100 Universal Units
+    # * Milli-Units -- Equals 1/1000 Universal Units
 
+    # Then, we'll add a new method, `convert_units`, which takes a `Recipe` and outputs updated units for it following these rules:
+
+    # Return
+    # 1. If the recipe calls for more than 100 Units of an ingredient, convert it to Centi-units
+    # 2. If the recipe calls for less than 1 Units of an ingredient, convert it to Milli-units
   end
 
 end
