@@ -43,31 +43,21 @@ class PantryTest < Minitest::Test
 
   def test_convert_unit
     pantry = Pantry.new
-    # Example Input: .25
     centis    = pantry.convert_unit(500)
     millis    = pantry.convert_unit(0.025)
     universal = pantry.convert_unit(75)
-    # * Centi-Units -- Equals 100 Universal Units
-    # * Milli-Units -- Equals 1/1000 Universal Units
 
-    # 1. If the recipe calls for more than 100 Units of an ingredient, convert it to Centi-units
-    # 2. If the recipe calls for less than 1 Units of an ingredient, convert it to Milli-units
-
-    # Example Return: {quantity: 25, units: "Milli-Units"}
     assert_equal ({quantity: 5, units: "Centi-Units"}), centis
     assert_equal ({quantity: 75, units: "Universal Units"}), universal
     assert_equal ({quantity: 25, units: "Milli-Units"}), millis
-
   end
 
   def test_convert_units
-    # Building our recipe
     r = Recipe.new("Spicy Cheese Pizza")
     r.add_ingredient("Cayenne Pepper", 0.025)
     r.add_ingredient("Cheese", 75)
     r.add_ingredient("Flour", 500)
 
-    # Convert units for this recipe
     pantry = Pantry.new
     actual = pantry.convert_units(r)
     expected = {
@@ -84,24 +74,16 @@ class PantryTest < Minitest::Test
     r = Recipe.new("Cheese Pizza")
     r.add_ingredient("Cheese", 20)
     r.add_ingredient("Flour", 20)
-
-    # Adding the recipe to the shopping list
     pantry.add_to_shopping_list(r)
 
-    # Checking the shopping list
     assert_equal ({"Cheese" => 20, "Flour" => 20}), pantry.shopping_list
 
-    # A second recipe
     r = Recipe.new("Spaghetti")
     r.add_ingredient("Noodles", 10)
     r.add_ingredient("Sauce", 10)
     r.add_ingredient("Cheese", 5)
-
-    # Adding a second recipe to the shopping list
     pantry.add_to_shopping_list(r)
 
-    # Checking the shopping list
     assert_equal ({"Cheese" => 25, "Flour" => 20, "Noodles" => 10, "Sauce" => 10}), pantry.shopping_list
-
   end
 end
