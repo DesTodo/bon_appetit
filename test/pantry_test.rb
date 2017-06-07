@@ -76,6 +76,6 @@ class PantryTest < Minitest::Test
       "Flour"          => {quantity: 5, units: "Centi-Units"}
     }
 
-    assert_equal actual, expected
+    assert_equal expected, actual
   end
 end

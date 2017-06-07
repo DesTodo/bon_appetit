@@ -28,6 +28,8 @@ class RecipeTest < Minitest::Test
       "Cheese"         => 75,
       "Flour"          => 5
     }
+    r.ingedients["Cayenne Pepper"]
+
     assert_equal r.ingredients, expected_ingedients
   end
 
